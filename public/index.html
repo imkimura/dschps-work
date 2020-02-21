@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New game</title>
+
+    <style>
+        #screen {
+            border: 3px solid black;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            image-rendering: -moz-crisp-edges;
+            width: 400px;
+            height: 400px;
+            background: url('src/images/fundo.png');
+            background-size: cover;
+        }
+    </style>
+
+</head>
+
+<body>
+    <img id="image" src="/src/images/boneco.png">
+    <canvas id="screen" width="10" height="10"></canvas>
+
+    <script type="module">
+        import createGame from './src/js/game.js'; 
+        import createKeyboardListener from './src/js/keyboard-listener.js';
+        import renderScreen from './src/js/render-screen.js';
+
+        const game = createGame()
+        const keyboardListener = createKeyboardListener()
+        keyboardListener.subscribe(game.movePlayer)
+
+        const screen = document.getElementById('screen') 
+        renderScreen(screen, game, requestAnimationFrame)
+        
+        game.addPlayer({ playerId: 'leia', x: 0, y: 0 })
+        game.addFruit({ fruitId: 'banana', x: 4, y: 3 })
+        game.addFruit({ fruitId: 'maça', x: 5, y: 8 })
+    </script>
+    <!-- <script src="main.js" type="text/javascript"></script> -->
+
+</body>
+
+</html>
